@@ -1,0 +1,76 @@
+lheight(size)
+    height: size
+    line-height: size
+
+button, input, textarea
+    outline: none !important
+
+transition(transition, time, mode)
+    -moz-transition: transition time mode
+    -o-transition: transition time mode
+    -webkit-transition: transition time mode
+    transition: transition time mode
+
+.link
+    cursor: pointer
+
+.col-md-6.has-feedback .form-control-feedback
+    right: 15px
+
+.tab-pane
+    margin: 25px 5px 0 5px
+
+.DarkOverlay
+    position: fixed
+    z-index: 1000
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background: rgba(0, 0, 0, 0.5)
+    overflow: hidden
+
+.uppercase
+    text-transform: uppercase
+
+.lowercase
+    text-transform: lowercase
+
+.ChessBoard
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAL0lEQVQ4T2N89uzZfwY8QFJSEp80A+OoAcMiDP4DAb6Ifv78Of50MGoAA+PQDwMAuX5VedFT3cEAAAAASUVORK5CYII=')
+
+.visibility-hidden
+    visibility: hidden
+
+div.tooltip-inner
+    max-width: none
+    white-space: nowrap
+
+.breadcrumb li:first-child
+    padding-bottom: 10px
+
+.breadcrumb
+    padding-left: 0
+
+.breadcrumb li:first-child
+    padding-left: 0
+
+.breadcrumb li:first-child a
+    margin-left: 0
+
+.pointer-cursor
+    cursor: pointer
+
+.op-0
+    opacity: 0
+  
+.op-0.visible
+    opacity: 1
+    transition: opacity 0.2s ease-in
+
+@media (min-width: 992px)
+    .col-n-p-l
+        padding-left: 0
+
+    .col-n-p-r
+        padding-right: 0

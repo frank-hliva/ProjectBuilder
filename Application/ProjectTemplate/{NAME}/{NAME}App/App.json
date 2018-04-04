@@ -1,0 +1,32 @@
+﻿{
+  "ServerOptions": {
+    "UriPrefix": "http://127.0.0.1:3000/"
+  },
+  "AppInfo": {
+    "Name": "{TITLE}",
+    "Email": "{SITE}@{SITE}.{DOMAIN}",
+    "InfoEmail": "info@{SITE}.{DOMAIN}",
+    "SupportEmail": "support@{SITE}.{DOMAIN}",
+    "DEV_ENV": "dev"
+  },
+  "RouteBuilder": {
+    "Assemblies": [ "{NAME}App, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" ]
+  },
+  "Controllers": {
+    "Assemblies": [ "{NAME}App, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" ]
+  },
+  "View": {
+    "Extension": ".html",
+    "Directory": "~/../../View"
+  },
+  "StaticContent": {
+    "Directory": "~/../../Web"
+  },
+  "MemorySession": {
+    "Expiration": 432000
+  },
+  "TextFormatter": {
+    "ParseLinks": true,
+    "LinkMaxLength": 25
+  }
+}

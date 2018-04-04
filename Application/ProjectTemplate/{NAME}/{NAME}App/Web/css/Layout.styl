@@ -1,0 +1,42 @@
+body
+    overflow-y: scroll
+
+html,
+body,
+#Application,
+.Application
+    height: 100%
+
+.Loading 
+    color: #eee
+    text-align: center
+    font-size: 55px
+    height: 100%
+    position absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    i
+        vertical-align: middle
+        display: inline-block
+        font-size: 0.75em
+        margin auto
+        color: #1f3853
+        margin-right: 3px
+
+.Loading:before
+    vertical-align: middle
+    content: ""
+    height: 100%
+    display: inline-block
+
+.breadcrumb
+    opacity: 1
+	
+.breadcrumb li:first-child
+	text-transform: uppercase
+
+.breadcrumb.visible
+    opacity: 1
+    transition: opacity 0.3s ease-in

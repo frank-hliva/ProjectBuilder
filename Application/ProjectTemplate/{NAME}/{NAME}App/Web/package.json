@@ -1,0 +1,41 @@
+{
+  "name": "{NAME.LOWER}",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {},
+  "author": "{AUTHOR}",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/immutable": "^3.8.7",
+    "@types/js-cookie": "^2.1.0",
+    "@types/node": "^9.4.6",
+    "@types/react": "^16.0.40",
+    "@types/react-bootstrap": "^0.32.6",
+    "@types/toastr": "^2.1.35",
+    "css-loader": "^0.28.11",
+    "file-loader": "^1.1.11",
+    "style-loader": "^0.20.3",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
+    "ts-loader": "^4.0.0",
+    "typescript": "^2.7.2",
+    "url-loader": "^1.0.1",
+    "webpack": "^4.0.0"
+  },
+  "dependencies": {
+	"jquery": "^3.3.1",
+	"js-cookie": "^2.2.0",
+    "deep-clone": "^3.0.2",
+    "deep-equal": "^1.0.1",
+	"moment": "^2.21.0",
+	"react": "^16.2.0",
+	"react-bootstrap": "^0.32.1",
+	"react-dom": "^16.2.0",
+	"react-redux": "^5.0.7",
+	"redux": "^3.7.2",
+	"redux-thunk": "^2.2.0",
+	"toastr": "^2.1.4",
+	"classnames": "^2.2.5"
+  }
+}

@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <title>{{App.FullTitle}}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    {% if DEV_ENV == "production" %}
+    <link rel="stylesheet" type="text/css" href="/css/Bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/Bootstrap/fa-regular.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/Bootstrap/fa-solid.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/Bootstrap/fa-brands.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/Bootstrap/fontawesome-all.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/Bundle.min.css?{{Timestamp}}">
+    {% else %}
+    <link rel="stylesheet" type="text/css" href="/css/Bootstrap/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/css/Bootstrap/fa-regular.css">
+    <link rel="stylesheet" type="text/css" href="/css/Bootstrap/fa-solid.css">
+    <link rel="stylesheet" type="text/css" href="/css/Bootstrap/fa-brands.css">
+    <link rel="stylesheet" type="text/css" href="/css/Bootstrap/fontawesome-all.css">
+    <link rel="stylesheet" type="text/css" href="/css/Bundle.css?{{Timestamp}}">
+    {% endif %}
+</head>
+<body>
+    <div id="Application"></div>
+    <script src="/home/model"></script>
+    {% if DEV_ENV == "production" %}
+    <script src="/js/Bundle.min.js?{{Timestamp}}"></script>
+    {% else %}
+    <script src="/js/Bundle.js?{{Timestamp}}"></script>
+    {% endif %}
+</body>
+</html>
