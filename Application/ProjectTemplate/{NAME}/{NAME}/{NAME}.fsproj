@@ -51,6 +51,7 @@
   </Choose>
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
+	<Compile Include="App\Paths.fs" />
 	<Compile Include="App\Formatting.fs" />
     <Compile Include="AssemblyInfo.fs" />
     <Content Include="packages.config" />

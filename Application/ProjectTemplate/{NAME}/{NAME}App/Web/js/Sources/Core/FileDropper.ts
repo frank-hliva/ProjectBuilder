@@ -1,36 +1,28 @@
 export class FileDropper {
-    private _event: any;
-    private _uploader: any;
-    private _data: any;
-
     public fileUploaded: ((data: any) => void) | null = null;
 
-    constructor(event, uploader, data) {
-        this._event = event;
-        this._uploader = uploader;
-        this._data = data;
-    }
+    constructor(
+        readonly event: React.DragEvent<HTMLTextAreaElement>,
+        readonly url: string,
+        readonly data?: { [key: string]: any; }
+    ) {}
 
-    get event() { return this._event; }
-    get uploader() { return this._uploader; }
-    get data() { return this._data; }
-
-    extractFileExt(url) {
+    protected extractFileExtension(url: string) {
         return url.substring(url.indexOf('/') + 1, url.indexOf(';'));
     }
 
-    extractData(url) {
+    protected extractFileData(url: string) {
         return url.substring(url.indexOf(',') + 1);
     }
 
     uploadFiles() {
-        for (let file of this.event.dataTransfer.files) {
+        for (let file of this.event.dataTransfer.files as {} as File[]) {
             let reader = new FileReader();
             reader.addEventListener("load", (event: any) => {
                 if (event.target.readyState == (FileReader as any).DONE) {
                     const result = event.target.result;
                     let req = new XMLHttpRequest();
-                    req.open('POST', this.uploader, true);
+                    req.open('POST', this.url, true);
                     req.setRequestHeader("X-Requested-With", "XMLHttpRequest");
                     req.responseType = 'text';
                     req.addEventListener("load", (event) => {
@@ -44,10 +36,12 @@ export class FileDropper {
                         }
                     });
                     let formData = new FormData()
-                    formData.append('data', this.extractData(result));
-                    formData.append('ext', this.extractFileExt(result));
+                    formData.append('data', this.extractFileData(result));
+                    formData.append('extension', this.extractFileExtension(result));
                     if (this.data) {
-                        for (let k in this.data) formData.append(k, this.data[k]);
+                        for (let k in this.data) {
+                            formData.append(k, this.data[k]);
+                        }
                     }
                     req.send(formData);
                 }
