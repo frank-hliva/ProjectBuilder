@@ -2,8 +2,6 @@ import * as React from 'react';
 import * as classNames from 'classnames';
 import { TextChangeEventArgs } from '../Core/TextEditing';
 
-
-
 type TContentEditableProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
     value: string;
     tagName?: string;
@@ -23,19 +21,9 @@ export class ContentEditable extends React.Component<TContentEditableProps> {
 
     private lastValue: string = '';
 
-    private resolveFocus() {
+    componentDidMount() {
         if (this.props.isFocused) {
             this.editor.focus();
-        }
-    }
-
-    componentDidMount() {
-        this.resolveFocus();
-    }
-
-    componentDidUpdate(prevProps: TContentEditableProps) {
-        if (prevProps.isFocused !== this.props.isFocused) {
-            this.resolveFocus();
         }
     }
 

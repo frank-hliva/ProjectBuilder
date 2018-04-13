@@ -1,4 +1,4 @@
-﻿namespace Deep.AssemblyInfo
+namespace Deep.AssemblyInfo
 
 open System.Reflection
 open System.Runtime.CompilerServices

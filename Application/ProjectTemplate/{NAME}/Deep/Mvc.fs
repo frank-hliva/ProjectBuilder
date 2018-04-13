@@ -1,4 +1,4 @@
-﻿namespace Deep.Mvc
+namespace Deep.Mvc
 
 open Deep
 open System.Net

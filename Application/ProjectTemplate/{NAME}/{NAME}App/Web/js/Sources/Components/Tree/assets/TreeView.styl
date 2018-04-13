@@ -1,5 +1,4 @@
 .TreeView
-    opacity: 0.9
     font-size 1.1em
     &.form-control
         height auto
@@ -62,12 +61,16 @@
                     background-repeat no-repeat
                     background-attachment scroll
                     background-image url(/img/tree.png) !important
+                .PosFirst, .PosNormal
+                    background-position -56px -18px
                 .PosLast
                     background-position -56px -36px
                 .FolderIcon
                     background-position -93px -56px
                     position relative
                     z-index 1
+
+
                 .Content
                     &:hover
                         background #eee
@@ -77,25 +80,15 @@
                         background-position -75px -56px !important
                 ul
                     display none
-        .Selected
-            & > div
+            .Selected
                 & > div
-                    & > .Content
-                        background #d9edfb !important
-    &.clean-style
-        .panel
-            border-color white
-            box-shadow none
-        .panel-body
-            background white
-            padding 0 !important
+                    & > div
+                        & > .Content
+                            background #d9edfb !important
 
 .TreeView ul, .TreeView li
     margin 0
     padding 0
-
-.TreeView ul li .Item .PosFirst, .TreeView ul li .Item .PosNormal
-    background-position -56px -18px
 
 .TreeView ul li .Item .Content,
 .TreeView ul li .Item nav

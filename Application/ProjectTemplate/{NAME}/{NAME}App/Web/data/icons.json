@@ -1,0 +1,11 @@
+{
+	"Image": "far fa-file-image",
+	"Video": "far fa-file-video",
+	"Audio": "far fa-file-audio",
+	"Pdf": "far fa-file-pdf",
+	"Archive": "far fa-file-archive",
+	"Word": "far fa-file-word",
+	"Excel": "far fa-file-excel",
+	"PowerPoint": "far fa-file-powerpoint",
+	"Text": "far fa-file-alt"
+}

@@ -1,0 +1,56 @@
+[
+	{ "ext": "jpg", "mimeType": "image/jpeg", "category": "Image" },
+	{ "ext": "jpeg", "mimeType": "image/jpeg", "category": "Image" },
+	{ "ext": "jpe", "mimeType": "image/jpeg", "category": "Image" },
+	{ "ext": "gif", "mimeType": "image/gif", "category": "Image" },
+	{ "ext": "png", "mimeType": "image/png", "category": "Image" },
+	{ "ext": "svg", "mimeType": "image/svg+xml", "category": "Image" },
+	{ "ext": "psd", "mimeType": "image/psd", "category": "Image" },
+	{ "ext": "tif", "mimeType": "image/tiff", "category": "Image" },
+	{ "ext": "tiff", "mimeType": "image/tiff", "category": "Image" },
+	{ "ext": "webp", "mimeType": "image/webp", "category": "Image" },
+	{ "ext": "ico", "mimeType": "image/x-icon", "category": "Image" },
+	{ "ext": "heif", "mimeType": "image/heif", "category": "Image" },
+	{ "ext": "heic", "mimeType": "image/heic", "category": "Image" },
+	{ "ext": "heif", "mimeType": "image/heif-sequence", "category": "Image" },
+	{ "ext": "heic", "mimeType": "image/heic-sequence", "category": "Image" },
+
+	{ "ext": "avi", "mimeType": "video/x-msvideo", "category": "Video" },
+	{ "ext": "mkv", "mimeType": "video/x-matroska", "category": "Video" },
+	{ "ext": "mp4", "mimeType": "video/mp4", "category": "Video" },
+	{ "ext": "m4v", "mimeType": "video/mp4", "category": "Video" },
+	{ "ext": "divx", "mimeType": "video/x-msvideo", "category": "Video" },
+	{ "ext": "xvid", "mimeType": "video/x-msvideo", "category": "Video" },
+	{ "ext": "mpg", "mimeType": "video/mpeg", "category": "Video" },
+	{ "ext": "webm", "mimeType": "video/webm", "category": "Video" },
+	{ "ext": "vp8", "mimeType": "video/webm", "category": "Video" },
+	{ "ext": "vp9", "mimeType": "video/webm", "category": "Video" },
+	{ "ext": "flv", "mimeType": "video/x-flv", "category": "Video" },
+	{ "ext": "wmv", "mimeType": "video/x-ms-wmv", "category": "Video" },
+	
+	{ "ext": "mp3", "mimeType": "audio/mpeg", "category": "Audio" },
+	{ "ext": "mp3", "mimeType": "audio/mp3", "category": "Audio" },
+	{ "ext": "wma", "mimeType": "audio/x-ms-wma", "category": "Audio" },
+	{ "ext": "wma", "mimeType": "audio/mp3", "category": "Audio" },
+	{ "ext": "aac", "mimeType": "audio/aac", "category": "Audio" },
+	{ "ext": "m4a", "mimeType": "audio/m4a", "category": "Audio" },
+	{ "ext": "flac", "mimeType": "audio/flac", "category": "Audio" },
+	{ "ext": "wav", "mimeType": "audio/mp3", "category": "audio/x-wav" },
+	
+	{ "ext": "pdf", "mimeType": "application/pdf", "category": "Pdf" },
+	
+	{ "ext": "zip", "mimeType": "application/zip", "category": "Archive" },
+	{ "ext": "rar", "mimeType": "application/x-rar-compressed", "category": "Archive" },
+	{ "ext": "7z", "mimeType": "application/x-7z-compressed", "category": "Archive" },
+	
+	{ "ext": "doc", "mimeType": "application/msword", "category": "Document" },
+	{ "ext": "docx", "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "category": "Word" },
+
+	{ "ext": "xls", "mimeType": "application/vnd.ms-excel", "category": "Document" },
+	{ "ext": "xlsx", "mimeType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "category": "Excel" },
+
+	{ "ext": "ppt", "mimeType": "application/vnd.ms-powerpoint", "category": "Document" },
+	{ "ext": "pptx", "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation", "category": "PowerPoint" },
+
+	{ "ext": "txt", "mimeType": "text/plain", "category": "Text" }
+]

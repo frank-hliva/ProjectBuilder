@@ -1,19 +1,19 @@
 export class FileDropper {
     public fileUploaded: ((data: any) => void) | null = null;
 
+    static containsFiles(event: React.DragEvent<HTMLElement>) {
+        return !!(
+            event.dataTransfer &&
+            event.dataTransfer.files &&
+            event.dataTransfer.files.length
+        );
+    }
+
     constructor(
-        readonly event: React.DragEvent<HTMLTextAreaElement>,
+        readonly event: React.DragEvent<HTMLElement>,
         readonly url: string,
         readonly data?: { [key: string]: any; }
     ) {}
-
-    protected extractFileExtension(url: string) {
-        return url.substring(url.indexOf('/') + 1, url.indexOf(';'));
-    }
-
-    protected extractFileData(url: string) {
-        return url.substring(url.indexOf(',') + 1);
-    }
 
     uploadFiles() {
         for (let file of this.event.dataTransfer.files as {} as File[]) {
@@ -36,8 +36,7 @@ export class FileDropper {
                         }
                     });
                     let formData = new FormData()
-                    formData.append('data', this.extractFileData(result));
-                    formData.append('extension', this.extractFileExtension(result));
+                    formData.append('data', result);
                     if (this.data) {
                         for (let k in this.data) {
                             formData.append(k, this.data[k]);
