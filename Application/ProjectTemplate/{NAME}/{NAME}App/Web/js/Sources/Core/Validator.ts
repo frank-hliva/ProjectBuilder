@@ -1,4 +1,4 @@
-import lang from './LangManager'
+/*import lang from './LangManager'
 import $ from 'jquery'
 
 export function notEmpty(value) {
@@ -125,4 +125,4 @@ export function validate(form, options) {
         }
     });
     return isValid;
-}
+}*/

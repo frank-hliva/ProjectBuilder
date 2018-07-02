@@ -39,8 +39,9 @@ export class ColorSelector extends React.Component<TColorSelectorProps> {
 		const { items, value, titleIsEnabled } = this.props;
 		return (
 			<div className="ColorSelector">
-				{items.map(i => (
+				{items.map((i, k) => (
 					<div
+						key={`${i.value}-${k}`}
 						className={classNames('ColorBox', { Selected: i.value === value })}
 						title={titleIsEnabled ? lang.getUcf(`COLOR_VALUE_${i.value}`) : undefined}
 						style={{ background: i.color }}

@@ -1,7 +1,7 @@
 import * as Cookie from 'js-cookie';
-import sk from '../Lang/sk';
-import en from '../Lang/en';
-import * as Text from '../Lib/Text'
+import { Text } from '../Lib/Text'
+const sk = require('../../../data/Lang/sk.json');
+const en = require('../../../data/Lang/en.json');
 
 export module Lang {
     export function inflectionSuffix(count: number) {

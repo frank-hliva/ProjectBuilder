@@ -1,5 +1,5 @@
 export class FileDropper {
-    public fileUploaded: ((data: any) => void) | null = null;
+    public fileUploaded: ((data: any, file: File) => void) | null = null;
 
     static containsFiles(event: React.DragEvent<HTMLElement>) {
         return !!(
@@ -28,7 +28,7 @@ export class FileDropper {
                     req.addEventListener("load", (event) => {
                         if (req.status == 200) {
                             if (this.fileUploaded) {
-                                this.fileUploaded(JSON.parse(req.responseText));
+                                this.fileUploaded(JSON.parse(req.responseText), file);
                             }
                         }
                         else {

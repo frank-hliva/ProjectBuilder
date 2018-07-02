@@ -1,6 +1,6 @@
 import { Regex } from './Regex';
 
-module Text {
+export module Text {
 
     export function nl2br(text: string) {
         return (text + '').replace(/(\r\n|\n\r|\r|\n)/g, "<br/>");
@@ -65,6 +65,3 @@ module Text {
 		return strings.join('');
 	}
 }
-
-
-export = Text;

@@ -12,7 +12,7 @@ export enum BackgroundSize {
 	inherit
 }
 
-type TPictureBoxProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
+type TPictureBoxProps = React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> & {
 	width?: string;
 	height?: string;
 	className?: string;

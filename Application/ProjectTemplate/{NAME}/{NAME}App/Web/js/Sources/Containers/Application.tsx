@@ -1,7 +1,5 @@
 import * as React from "react";
-import * as ReactDOM from "react-dom";
-
-import * as Guid from "../Lib/Guid";
+import { Guid } from "../Lib/Guid";
 import { Header } from "./Webparts/Header";
 import { Main } from "./Webparts/Main";
 

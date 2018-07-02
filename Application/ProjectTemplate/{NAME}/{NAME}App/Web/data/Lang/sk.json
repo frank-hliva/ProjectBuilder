@@ -1,0 +1,130 @@
+{
+    "LOCALE": "sk-SK",
+
+    "OK": "ok",
+    "CANCEL": "zrušiť",
+
+    "APP_BRAND": "Diary",
+    "APP_OWNER": "PlutonKrea",
+    "NOTE": "poznámka",
+
+    "NODETYPE.attachment": "príloha",
+    "NODETYPE.calendar": "kalendár",
+    "NODETYPE.day": "deň",
+    "NODETYPE.file": "súbor",
+    "NODETYPE.folder": "adresár",
+    "NODETYPE.week": "týždeň",
+    "NODETYPE.event": "event",
+    "NODETYPE.link": "odkaz",
+    "NODETYPE.task": "úloha",
+
+    "FILE_SINGULAR": "súbor",
+    "FILE_PLURAL_2_4": "súbory",
+    "FILE_PLURAL": "súborov",
+
+    "FOLDER_SINGULAR": "adresár",
+    "FOLDER_PLURAL_2_4": "adresáre",
+    "FOLDER_PLURAL": "adresárov",
+
+    "ATTACHMENT_SINGULAR": "príloha",
+    "ATTACHMENT_PLURAL_2_4": "prílohy",
+    "ATTACHMENT_PLURAL": "príloh",
+
+    "CATEGORIES": "kategórie",
+    "EXPLORER": "prieskumník",
+
+    "INVALID_URL_ADDRESS": "Nesprávna adresa",
+
+    "DELETE_FILE_TITLE": "Zamzať súbor?",
+
+    "MOVE_TO_BIN_CONFIRM_MESSAGE": "Naozaj chcete túto položku presunúť do koša?",
+    "RECOVER_CONFIRM_MESSAGE": "Naozaj chcete obnoviť túto položku?",
+    "DELETE_CONFIRM_MESSAGE": "Naozaj chcete zmazať túto položku?",
+    
+    "EMPTY_BIN_CONFIRM_MESSAGE": "Naozaj chcete vyprázdniť kôš?",
+    "EMPTY_THE_BIN": "vysypať",
+
+    "UNDEFINED_NAME": "bez názvu",
+
+    "CREATE": "vytvoriť",
+
+    "CREATED": "vytvorené",
+    "LAST_MODIFIED": "posledná úprava",
+    "EXIT": "ukončiť",
+
+    "EDIT": "upraviť",
+    "COLLAPSE_ALL": "Zabaliť všetko",
+    "EXPAND_ALL": "Rozbaliť všetko",
+
+    "BIN": "kôš",
+
+    "BACK": "späť",
+    "ADD_RECORD": "pridať záznam",
+    "ADD_FOLDER": "pridať adresár",
+    "ADD_CALENDAR": "pridať kalendár",
+
+    "MINUS_1_DAY": "pridať -1 deň",
+    "ADD_DAY": "pridať deň",
+    "PLUS_1_DAY": "pridať +1 deň",
+
+    "SAVE": "uložiť",
+    "VISIBLE_ATTACHMENTS": "prílohy",
+    "DONE": "hotovo",
+    "MOVE_TO_BIN": "do koša",
+
+    "RECOVER": "obnoviť",
+    "DELETE": "zmazať",
+
+    "SELECT_DATE_FOR_DAY": "vyberte dátum pre deň",
+    "DATE": "dátum",
+    "DAY": "deň",
+    "CLOSE": "zatvoriť",
+
+    "WEEK": "týždeň",
+
+    "USER": "Užívateľ",
+    "USERNAME": "Užívateľské meno",
+    "PASSWORD": "Heslo",
+    "LOGIN": "Prihlásiť",
+    "LOGIN_TO": "Prihlásenie do",
+    "REMEMBER_ME": "zapamätať heslo",
+    "FORGOT_PASSWORD": "obnovenie hesla",
+    "DO_NOT_HAVE_ACCOUNT": "ešte nemáte účet?",
+    "CREATE_ACCOUNT": "Vytvoriť účet",
+    "SIGN_OUT": "Odhlásiť",
+
+    "WELCOME": "Vitaj",
+    "ALLOW_MOVING_ITEMS": "povoliť presúvanie položiek",
+    
+    "EDITED_NODE_DND_ERROR": "Editovaný záznam nemožno presúvať, prosím najprv tento záznam uložte",
+
+    "LIST": "Zoznam",
+    "LIST_FOR": "Zoznam pre: ", 
+    "LIST_IS_EMPTY": "zoznam neobsahuje žiadne položky",
+
+    "TASK_CANT_CONTAIN_LIST": "položka zoznamu nemôže obsahovať zoznam",
+    "ITEM_NOT_SELECTED": "nebola vybratá žiadna položka",
+
+    "INSERT_ITEM": "pridať položku",
+    "INC_INDENT": "+ vnorenie",
+    "DEC_INDENT": "- vnorenie",
+    "MOVE_UP": "posunúť hore",
+    "MOVE_DOWN": "posunúť dole",
+    "DELETE_ITEM": "zmazať položku",
+
+    "WINDOW": "okno",
+    "WINDOWS": "okná",
+    "RESET_WINDOW_LAYOUT": "Resetnúť rozloženie okien",
+
+    "WINDOW_EXPAND": "roztiahnuť",
+    "WINDOW_CLOSE": "zatvoriť",
+
+    "WINDOWS_ALL_CASCADE": "Všetky pod seba",
+    "WINDOWS_ALL_TILE": "Všetky vedľa seba",
+
+    "DETAIL": "Podrobnosti",
+
+    "DROP_BOX_INFO": "presuňťe sem súbor(y)",
+
+    "UPLOAD_ATTACHMENTS": "Nahrať prílohy"
+}

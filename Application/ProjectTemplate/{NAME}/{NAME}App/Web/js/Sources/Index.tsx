@@ -1,13 +1,11 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import * as Immutable from 'immutable';
 import { Provider, connect } from 'react-redux';
 import Store from './Model/Store';
 import * as UriHash from './Lib/UriHash';
 import { Router } from './Core/Router';
-import * as IO from './Core/IO';
 import { Application } from './Containers/Application';
-import * as messenger from "./App/Messenger";
+import messenger from './App/Messenger';
 import lang from './Core/LangManager'
 
 async function changePage(page, loading = true) {
@@ -37,7 +35,7 @@ async function changePage(page, loading = true) {
     }
 }
 
-UriHash.listen(async uri => Store.dispatch(await changePage(uri)));
+UriHash.listen(async uri => Store.dispatch(await changePage(uri) as any));
 
 module Mappers {
     export function mapStateToProps(state) {

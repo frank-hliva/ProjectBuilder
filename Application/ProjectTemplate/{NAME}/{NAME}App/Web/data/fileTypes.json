@@ -35,7 +35,7 @@
 	{ "ext": "aac", "mimeType": "audio/aac", "category": "Audio" },
 	{ "ext": "m4a", "mimeType": "audio/m4a", "category": "Audio" },
 	{ "ext": "flac", "mimeType": "audio/flac", "category": "Audio" },
-	{ "ext": "wav", "mimeType": "audio/mp3", "category": "audio/x-wav" },
+	{ "ext": "wav", "mimeType": "audio/x-wav", "category": "Audio" },
 	
 	{ "ext": "pdf", "mimeType": "application/pdf", "category": "Pdf" },
 	
@@ -52,5 +52,10 @@
 	{ "ext": "ppt", "mimeType": "application/vnd.ms-powerpoint", "category": "Document" },
 	{ "ext": "pptx", "mimeType": "application/vnd.openxmlformats-officedocument.presentationml.presentation", "category": "PowerPoint" },
 
-	{ "ext": "txt", "mimeType": "text/plain", "category": "Text" }
+	{ "ext": "txt", "mimeType": "text/plain", "category": "Text" },
+
+	{ "ext": "html", "mimeType": "text/html", "category": "Html" },
+	{ "ext": "xhtml", "mimeType": "application/xhtml+xml", "category": "Html" },
+	{ "ext": "xml", "mimeType": "application/xml", "category": "Xml" },
+	{ "ext": "xml", "mimeType": "text/xml", "category": "Xml" }
 ]
