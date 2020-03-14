@@ -21,6 +21,8 @@ type IKernel =
     abstract RegisterInstance<'t> : obj -> IKernel
     abstract Resolve : Type -> obj
     abstract Resolve<'t> : unit -> 't
+    abstract GetOrResolve : Type -> obj
+    abstract GetOrResolve<'t> : unit -> 't
     abstract Contains : Type -> bool
     abstract TryFindInstance : Type -> obj option
 
@@ -61,7 +63,7 @@ type Kernel internal (types : KernelMap, externalResolver : IExternalResolver op
         | _ ->
             match externalResolver with
             | Some resolver -> External(resolver.Resolve(t))
-            | _ -> failwith (sprintf "Type %s not registered" t.Name)
+            | _ -> failwith (sprintf "Type %s is not registered" t.Name)
 
     let chooseParams (c : ConstructorInfo) =
         let parameters = c.GetParameters()
@@ -93,7 +95,7 @@ type Kernel internal (types : KernelMap, externalResolver : IExternalResolver op
                     lock i.Instance (fun () -> i.Instance := Some instance)
                     instance
                 | _ -> failwith "Invalid lifetime"
-            | _ -> failwith (sprintf "Constructor parameter mismatch: %s" (implementation.ToString()))
+            | _ -> failwith (sprintf "Constructor parameter mismatch on type: %s" implementation.FullName)
 
     interface IKernel with
 
@@ -163,6 +165,14 @@ type Kernel internal (types : KernelMap, externalResolver : IExternalResolver op
         member k.Resolve<'t>() =
             (k :> IKernel).Resolve(typedefof<'t>) :?> 't
 
+        member k.GetOrResolve(t : Type) =
+            match t |> (k :> IKernel).TryFindInstance with
+            | Some instance -> instance
+            | _ -> (k :> IKernel).Resolve(t)
+
+        member k.GetOrResolve<'t>() =
+            (k :> IKernel).GetOrResolve(typedefof<'t>) :?> 't
+
         member k.Contains(t) = t |> containsType
 
         member k.TryFindInstance(t : Type) =
@@ -171,5 +181,10 @@ type Kernel internal (types : KernelMap, externalResolver : IExternalResolver op
                 Some kernelItem.Instance.Value.Value
             | _ -> None
 
-    new(?resolver) = Kernel(Map.empty, resolver)
+    new() = Kernel(Map.empty, None)
+    new(resolver : IExternalResolver) = Kernel(Map.empty, Some resolver)
     new(resolver : IKernel) = Kernel(new ExternalResolver(resolver))
+
+    static member Create() = new Kernel() :> IKernel
+    static member Create(resolver : IExternalResolver) = new Kernel(resolver) :> IKernel
+    static member Create(resolver : IKernel) = new Kernel(resolver) :> IKernel

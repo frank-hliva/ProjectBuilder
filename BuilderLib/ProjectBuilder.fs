@@ -18,7 +18,7 @@ module ProjectBuilder =
         |> Map.toSeq
         |> Seq.fold
             (fun (acc : StringBuilder) (key, value) ->
-                acc.Replace(sprintf "{%s}" key, value))
+                acc.Replace(sprintf "%s" key, value))
             (new StringBuilder(text))
         |> fun result -> result.ToString()
 

@@ -11,7 +11,7 @@ type RequestKernelConfigurator(config : IKernel -> IKernel) =
     member c.Config = config
 
 type HttpApplication(applicationKernel : IKernel, listenerContainer : ListenerContainer, requestConfigurator : RequestKernelConfigurator) =
-
+    let headers = applicationKernel.Resolve<ServerConfig>().GetServerOptions().Headers
     abstract RegisterRequestObjects : HttpListenerContext -> IKernel -> IKernel
     default a.RegisterRequestObjects (context : HttpListenerContext) (requestContainer : IKernel) =
         let output = new Output(context.Request, context.Response)
@@ -19,7 +19,7 @@ type HttpApplication(applicationKernel : IKernel, listenerContainer : ListenerCo
             context |> box
             output |> box
             new Request(context.Request) |> box
-            new Response(context.Response, output) |> box
+            new Response(context.Response, output, headers) |> box
         ]
         |> Seq.fold
             (fun (requestContainer : IKernel) (instance : obj) ->
@@ -28,6 +28,7 @@ type HttpApplication(applicationKernel : IKernel, listenerContainer : ListenerCo
             requestContainer
                 .Register<Get>(LifeTime.Singleton)
                 .Register<Post>(LifeTime.Singleton)
+                .Register<Posted>(LifeTime.Singleton)
                 .Register<MultipartForm>(LifeTime.Singleton)
                 .Register<Reply>(LifeTime.Singleton)
                 .Register<ISessionManager, SessionManager>(LifeTime.PerResolve)
@@ -44,6 +45,6 @@ type HttpApplication(applicationKernel : IKernel, listenerContainer : ListenerCo
         listenerContainer.Apply(kernel)
 
     interface IApplication with
-        override a.Run(uri : string) = Server.listen uri a.Listener
+        override a.Run(uriPrefixes : string seq) = Server.listen uriPrefixes a.Listener
 
     new(applicationKernel, router) = HttpApplication(applicationKernel, router, null)

@@ -5,6 +5,7 @@ open System.IO
 open System.IO.Compression
 open System.Text
 open Deep
+open System.Net
 
 module Path =
 
@@ -29,12 +30,12 @@ module Path =
                 |> fun path -> System.IO.Path.Combine(acc, path)) ""
         |> map
 
-type SendFileOptions = { BufferSize : int; ContentType : string } 
+type SendFileOptions = { BufferSize : int; ContentType : string }
 
 type File() =
 
     static let defaultSendOptions (mimeType : string) (options : SendFileOptions option) =
-        let defaultBufferSize = 256 * 1024
+        let defaultBufferSize = 1024 * 1024
         let options =
             match options with
             | Some options -> options
@@ -57,9 +58,11 @@ type File() =
             response.ContentLength64 <- stream.Length
             response.SendChunked <- false
             response.ContentType <- options.ContentType
+            if (mimeType |> HttpRange.isRangeContent)
+            then response.Headers.Add("Accept-Ranges", "bytes")
             if (response.Headers.["Cache-Control"] = null) then
                 response.Headers.Add("Cache-Control", "public, max-age=31536000")
-            let buffer = Array.create(options.BufferSize) 0uy
+            let buffer = Array.create(options.BufferSize |> int) 0uy
             let rec loop () = async {
                 let! read = stream.AsyncRead(buffer, 0, buffer.Length)
                 if read > 0 then
@@ -76,6 +79,47 @@ type File() =
                 File.sendBinary(fileStream, mimeType, response, options)
             | _ ->
                 File.sendBinary(fileStream, mimeType, response)
+    }
+
+    static member sendBinaryRange (stream : Stream, mimeType : string, range : int64 * Int64, response : Response, ?options: SendFileOptions) = async {
+        let options = options |> defaultSendOptions mimeType
+        if stream.Length = 0L then response.Close()
+        else
+            let beginPos, endPos = range
+            let endPos = Math.Min(beginPos + (int64 options.BufferSize), endPos)
+            let len = stream.Length
+            if beginPos >= len || endPos > len then
+                response.StatusCode <- 416
+                response.Headers.Add("Content-Range", sprintf "bytes */%d" len)
+            else
+                let outputStream = response.RawOutputStream
+                response.StatusCode <- 206
+                response.SendChunked <- false
+                response.ContentType <- options.ContentType
+                response.Headers.Add("Accept-Ranges", "bytes")
+                response.Headers.Add("Content-Range", sprintf "bytes %d-%d/%d" beginPos endPos len)
+                if (response.Headers.["Cache-Control"] = null) then
+                    response.Headers.Add("Cache-Control", "no-cache")
+                let bufferSize = int64 options.BufferSize
+                let buffer = Array.create(options.BufferSize) 0uy
+
+                stream.Seek(beginPos, SeekOrigin.Begin) |> ignore
+                let rec loop (remainingBytes : int64) = async {
+                    let! read = stream.AsyncRead(buffer, 0, (if remainingBytes > bufferSize then bufferSize else remainingBytes) |> int)
+                    if read > 0 then
+                        let! _ = outputStream.AsyncWrite(buffer, 0, read) |> Async.Catch
+                        do! loop(remainingBytes - int64 read) }
+                do! loop(endPos - beginPos + 1L) }
+
+    static member sendBinaryRange (path : string, range : int64 * Int64, response : Response, ?options: SendFileOptions) = async {
+        use fileStream = File.OpenRead(path)
+        let mimeType = path |> toMimeType
+        return!
+            match options with
+            | Some options ->
+                File.sendBinaryRange(fileStream, mimeType, range, response, options)
+            | _ ->
+                File.sendBinaryRange(fileStream, mimeType, range, response)
     }
 
     static member sendText(stream : Stream, mimeType : string, response : Response, ?options: SendFileOptions) = async {
@@ -108,3 +152,22 @@ type File() =
         else
             if options.IsSome then File.sendBinary(path, response, options.Value)
             else File.sendBinary(path, response)
+
+    static member asyncDownloadBuffer (uri : Uri, bytesToGet : int) = async {
+        let request = uri |> WebRequest.Create
+        match request with
+        | :? HttpWebRequest as request ->
+            request.AddRange(0, bytesToGet - 1)
+        | _ -> ()
+        use response = request.GetResponse()
+        use stream = response.GetResponseStream()
+        let buffer = Array.create bytesToGet 0uy
+        let! readed = stream.AsyncRead(buffer, 0, bytesToGet)
+        if readed < bytesToGet
+        then Array.Resize(ref buffer, readed)
+        return buffer
+    }
+
+    static member downloadBuffer (uri : Uri, bytesToGet : int) =
+        File.asyncDownloadBuffer(uri, bytesToGet)
+        |> Async.RunSynchronously

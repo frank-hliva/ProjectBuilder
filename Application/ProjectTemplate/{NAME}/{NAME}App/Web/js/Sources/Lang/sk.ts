@@ -1,5 +1,5 @@
 export default {
-    APP_BRAND: '{NAME}',
+    APP_BRAND: 'FastProduct',
 
     FILE_SINGULAR: 'súbor',
     FILE_PLURAL_2_4: 'súbory',

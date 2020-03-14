@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { PropTypes } from 'prop-types';
 import * as isEqual from 'deep-equal';
 import dynamicLoader from '../Core/DynamicLoader';
 import { TTextChangeEventArgs } from '../Core/TextEditing';

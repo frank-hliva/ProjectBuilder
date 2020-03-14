@@ -1,1 +1,1 @@
-{"templatePath":"","targetPath":"C:\\","values":{"AUTHOR":"Frank Hliva","DOMAIN":".sk","NAME":"Diary","NAME.LOWER":"diary","SITE":"diary","TITLE":"Diary"}}
+{"templatePath":"","targetPath":"C:\\Pluton","values":{"{AUTHOR}":"Frank Hliva","{DOMAIN}":".sk","{NAME.LOWER}":"plutonCore","{NAME}":"PlutonCore","{SITE}":"plutonCore","{TITLE}":"PlutonCore"}}

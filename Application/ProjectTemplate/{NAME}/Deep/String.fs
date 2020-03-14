@@ -4,8 +4,8 @@ module Deep.StringModule
 open System
 open System.Text
 open System.Text.RegularExpressions
-open System.Globalization
 open System.Runtime.CompilerServices
+open System.Globalization
 
 [<Extension>]
 type StringExtensions () =
@@ -48,8 +48,8 @@ type StringExtensions () =
     [<Extension>]
     static member inline Webalize(input : string) =
         let rec link acc = function
-        | ' ' :: t | '-' :: t -> t |> link ('-' :: acc)
-        | h :: t when Char.IsLetter h || Char.IsDigit h ->
+        | ' ' :: t | '-' :: t | '_' :: t -> t |> link ('-' :: acc)
+        | h :: t when Char.IsLetter h || Char.IsDigit h || h = '.' ->
             t |> link (Char.ToLower h :: acc)
         | _ :: t -> t |> link acc
         | [] -> acc
@@ -58,9 +58,14 @@ type StringExtensions () =
         |> List.ofSeq |> link [] |> List.rev |> String.Concat
 
     [<Extension>]
-    static member inline Capitalize(input : string) =
+    static member inline UpperCaseFirst(input : string) =
         if String.IsNullOrEmpty input then input
         else input.[0..0].ToUpper() + input.[1..]
+
+    [<Extension>]
+    static member inline LowerCaseFirst(input : string) =
+        if String.IsNullOrEmpty input then input
+        else input.[0..0].ToLower() + input.[1..]
 
     [<Extension>]
     static member inline ToLines(input : string) =
@@ -73,3 +78,27 @@ type StringExtensions () =
     [<Extension>]
     static member inline IsIntNumber(input : string) =
         input |> Int64.TryParse |> fst
+
+    [<Extension>]
+    static member inline ReplaceAll(input : string, replacements : list<string * string>) =
+        let rec replaceAll (replacements : list<string * string>) (stringBuilder : StringBuilder) =
+            match replacements with
+            | [] -> stringBuilder.ToString()
+            | (oldValue, newValue) :: replacements ->
+                replaceAll replacements (stringBuilder.Replace(oldValue, newValue))
+        input
+        |> StringBuilder
+        |> replaceAll replacements
+
+
+[<Extension>]
+type DateTimeExtensions () =
+    
+    [<Extension>]
+    static member inline ToISOString(dateTime : DateTime, ?isUniversal : bool) =
+        let isUniversal = defaultArg isUniversal false
+        let isoDateTimeFormat = CultureInfo.InvariantCulture.DateTimeFormat
+        if isUniversal
+        then isoDateTimeFormat.UniversalSortableDateTimePattern
+        else isoDateTimeFormat.SortableDateTimePattern
+        |> dateTime.ToString

@@ -1,7 +1,7 @@
 import * as _ from 'ramda';
 export module List {
-    export function concatListOfList(listOfLists: any[][]) {
-        return [].concat.apply([], listOfLists);
+    export function concatListOfList<T>(listOfLists: T[][]) {
+        return [].concat.apply([], listOfLists as any) as T[];
     }
 
     export const swap = _.curry((index1, index2, list) => {

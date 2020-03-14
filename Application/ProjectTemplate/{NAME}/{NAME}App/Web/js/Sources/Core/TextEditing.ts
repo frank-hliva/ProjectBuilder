@@ -24,8 +24,10 @@ export module ContentEditable {
             range.selectNodeContents(contentEditableElement);
             range.collapse(caretPosition === TCaretPosition.Start);
             let selection = window.getSelection();
-            selection.removeAllRanges();
-            selection.addRange(range);
+            if (selection) {
+                selection.removeAllRanges();
+                selection.addRange(range);
+            }
         } else if (typeof (document.body as any).createTextRange != "undefined") {
             let textRange = (document.body as any).createTextRange();
             textRange.moveToElementText(contentEditableElement);

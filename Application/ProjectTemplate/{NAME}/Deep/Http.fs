@@ -10,6 +10,12 @@ open System.Security.Cryptography.X509Certificates
 open Deep.Routing
 open System.Web
 
+[<AutoOpen>]
+module HttpExtensions =
+    type WebHeaderCollection with
+        member c.Add(newHeaders : string seq) =
+            newHeaders |> Seq.iter(c.Add)
+
 type Request internal (httpListenerRequest : HttpListenerRequest, parameters : RouteParams) =
     member this.GetClientCertificate() : X509Certificate2 = httpListenerRequest.GetClientCertificate()
     member this.BeginGetClientCertificate(requestCallback : AsyncCallback, state : Object) : IAsyncResult = httpListenerRequest.BeginGetClientCertificate(requestCallback, state)
@@ -44,22 +50,34 @@ type Request internal (httpListenerRequest : HttpListenerRequest, parameters : R
     member this.KeepAlive with get() : Boolean = httpListenerRequest.KeepAlive
     member this.RemoteEndPoint with get() : IPEndPoint = httpListenerRequest.RemoteEndPoint
     member this.LocalEndPoint with get() : IPEndPoint = httpListenerRequest.LocalEndPoint
-    
     member this.Root = 
         let url = this.Url
         let port = if url.Port = 80 then "" else sprintf ":%d" url.Port
         sprintf "%s%s%s%s" url.Scheme Uri.SchemeDelimiter url.Host port
     member this.GetReader() : StreamReader = new StreamReader(httpListenerRequest.InputStream)
     member this.Params = parameters
+    member this.GetRemoteClientInfo() = new RemoteClientInfo(this.RemoteEndPoint)
     new (httpListenerRequest) = Request(httpListenerRequest, Map.empty)
 
-type Response internal (httpListenerResponse : HttpListenerResponse, output : Output) =
-    do
+and RemoteClientInfo(remoteEndPoint : IPEndPoint) =
+    let ipAddress = lazy remoteEndPoint.Address
+    let lazyIPHostEntry = lazy (Dns.GetHostEntry(ipAddress.Value))
+    member i.IPEndPoint = remoteEndPoint
+    member i.IPAddress with get() = ipAddress.Value
+    member i.IPHostEntry with get() = lazyIPHostEntry.Value
+    member i.HostName with get() = lazyIPHostEntry.Value.HostName
+
+type Response internal (httpListenerResponse : HttpListenerResponse, output : Output, defaultHeaders : string seq) =
+    let headers =
         let headers = httpListenerResponse.Headers
-        headers.Add("Server", "\r\n\r\n")
-        headers.Add("X-Powered-By", "Deep")
+        headers.Add("Server: \r\n\r\n")
+        headers.Add("X-Powered-By: Deep")
+        if defaultHeaders <> null
+        then headers.Add(defaultHeaders)
+        headers
     member this.CopyFrom(templateResponse : HttpListenerResponse) : unit = httpListenerResponse.CopyFrom(templateResponse)
     member this.AddHeader(name : String, value : String) : unit = httpListenerResponse.AddHeader(name, value)
+    member this.AddHeaders(newHeaders : string seq) = headers.Add newHeaders
     member this.AppendHeader(name : String, value : String) : unit = httpListenerResponse.AppendHeader(name, value)
     member this.Redirect(url : String) : unit = httpListenerResponse.Redirect(url)
     member this.AppendCookie(cookie : Cookie) : unit = httpListenerResponse.AppendCookie(cookie)

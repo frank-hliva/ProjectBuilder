@@ -1,4 +1,4 @@
-﻿namespace Deep.View.DotLiquid.AssemblyInfo
+namespace Deep.View.DotLiquid.AssemblyInfo
 
 open System.Reflection
 open System.Runtime.CompilerServices

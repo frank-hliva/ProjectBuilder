@@ -1,3 +1,3 @@
 export default {
-    APP_BRAND: '{NAME}'
+    APP_BRAND: 'FastProduct'
 }

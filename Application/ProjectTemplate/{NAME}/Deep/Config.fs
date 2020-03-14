@@ -82,7 +82,10 @@ type AppInfoConfig(config : Config) =
     interface IConfigSection
     member c.GetAppInfo() = config.SelectAs<AppInfo>("AppInfo")
 
-type ServerOptions = { UriPrefix : string }
+type ServerOptions = {
+    UriPrefixes : string seq
+    Headers: string seq
+}
 
 type ServerConfig(config : Config) =
     interface IConfigSection
